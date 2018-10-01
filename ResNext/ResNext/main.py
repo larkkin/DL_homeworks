@@ -15,38 +15,6 @@ from model import resnext
 from logger import Logger
 
 
-# step = 0
-
-
-# def train(epochs_num, model, optimizer, loss_func, train_loader, logger):
-#     model.train()
-#     global step
-#     for batch_idx, (x, y) in enumerate(train_loader):
-#         step += 1
-#         x, y = x.to(device), y.to(device)
-
-#         x, y = Variable(x), Variable(y)
-#         optimizer.zero_grad()
-
-#         y_ = model(x)
-
-#         loss = loss_func(y_, y)
-#         loss.backward()
-#         optimizer.step()
-
-#         pred = y_.data.max(1)[1]
-#         correct = pred.eq(y.data).cpu().sum()
-
-#         acc = float(correct) / len(pred)
-
-#         if batch_idx % 100 == 0:
-#             # Tensorboard Logging
-
-#             logger.scalar_summary('loss', loss.item(), step + 1)
-#             logger.scalar_summary('accuracy', acc, step + 1)
-#             logger.image_summary(y[:10].cpu().numpy(), x[:10].cpu().numpy(), step + 1)
-
-
 def main():
     if len(sys.argv) > 1:
         run_dir = sys.argv[1]
