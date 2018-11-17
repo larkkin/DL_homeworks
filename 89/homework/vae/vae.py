@@ -6,7 +6,7 @@ from torch.nn import functional as F  # noqa: F401
 
 class VAE(nn.Module):
     def __init__(self, image_size=28, enc_hidden=400,
-                 latent_size=20, dec_hidden=400):
+                 latent_size=30, dec_hidden=400):
         super().__init__()
         self.latent_size = latent_size
 
@@ -51,7 +51,7 @@ def loss_function(recon_x, x, mu, logvar):
     https://arxiv.org/abs/1312.6114
     0.5 * sum(1 + log(sigma^2) - mu^2 - sigma^2)
     """
-    bce = F.binary_cross_entropy(recon_x, x.view(-1, 784), size_average=False)
+    bce = F.binary_cross_entropy(recon_x, x.view(-1, 784), reduction='sum')
     kld = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
 
     return bce + kld

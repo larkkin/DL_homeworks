@@ -24,7 +24,8 @@ class Trainer:
         epoch_loss = 0
 
         for batch_idx, (data, _) in enumerate(self.train_loader):
-            self.model.zero_grad()
+            # self.model.zero_grad()
+            self.optimizer.zero_grad()
             data = data.to(self.device)
             output_data, mu, logvar = self.model(data)
             target = data
@@ -92,7 +93,8 @@ class Trainer:
         batch_generated = self.model(batch)[0].view(*batch.shape)
         print(batch.shape, '\n', batch_generated.shape)
         grid_generated = vutils.make_grid(batch_generated, nrow=int(batch_size**0.5))
-        res_image = vutils.make_grid([grid_real * 255, grid_generated * 255], nrow=2)
+        # res_image = vutils.make_grid([grid_real * 255, grid_generated * 255], nrow=2)
+        res_image = vutils.make_grid([grid_real, grid_generated], nrow=2)
         show(res_image, epoch)
 
 
